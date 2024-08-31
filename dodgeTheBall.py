@@ -7,7 +7,7 @@ from perso import Perso
 from projectile import Projectile
 from random import randint
 
-#test
+#test pour push
 pygame.init()
 pygame.key.set_repeat(400, 30)
 fenetre = pygame.display.set_mode((640, 480))
