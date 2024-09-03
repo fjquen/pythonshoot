@@ -16,7 +16,7 @@ class Balle :
         self.vitesse = randint(1,2)
 
     def affiche(self, fenetre) :
-        fenetre.blit(self.balle_mask, self.rect)
+        fenetre.blit(self.image, self.rect)
 
     def deplace(self) :
         self.rect = self.rect.move(0,self.vitesse)
