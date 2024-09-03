@@ -9,12 +9,14 @@ class Balle :
     sa création."""
 
         self.image = pygame.image.load(image).convert_alpha()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.balle_mask = self.mask.to_surface()
         self.rect = self.image.get_rect()
         self.rect.center = center
         self.vitesse = randint(1,2)
 
     def affiche(self, fenetre) :
-        fenetre.blit(self.image, self.rect)
+        fenetre.blit(self.balle_mask, self.rect)
 
     def deplace(self) :
         self.rect = self.rect.move(0,self.vitesse)

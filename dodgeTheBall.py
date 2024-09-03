@@ -16,8 +16,7 @@ fenetre.blit(fond,(0,0))
 perso = Perso("Perso.png", (270,380))
 perso.image
 
-balle = Balle('golfBall.png',(270,30))
-balle.image
+
 continuer = True
 listeBalles = []
 listeTirs = []
@@ -26,8 +25,8 @@ test = 0
 intervalFire = 0
 clock = pygame.time.Clock()
 while continuer :
-    #if len(listeBalles) < 3 and randint(1,500)<=3:
-        #listeBalles.append(Balle('golfBall.png',(randint(25,455),-25)))
+    if len(listeBalles) < 3 and randint(1,500)<=3:
+        listeBalles.append(Balle('golfBall.png',(randint(25,455),-25)))
     for event in pygame.event.get():
         if event.type == QUIT:
             continuer = False
@@ -48,18 +47,19 @@ while continuer :
         tir.deplace()
         if tir.rect.top <= 0 :
             listeTirs.remove(tir)
-        elif balle.collision(tir.rect):
-              print("touché")
         tir.affiche(fenetre)
         
-    #for ball in listeBalles :
-       #ball.deplace()
-       #if ball.rect.top >= 480 :
-            #listeBalles.remove(ball)
+    for ball in listeBalles :
+       ball.deplace()
+       if ball.rect.top >= 480 :
+            listeBalles.remove(ball)
+       for tir in listeTirs :
+              if ball.mask.overlap(tir.mask,(tir.rect.x-ball.rect.x,tir.rect.y-ball.rect.y)):
+                 listeBalles.remove(ball)
        #else :
            #if ball.collision(perso.rect) :
                #continuer = False
-    balle.affiche(fenetre)
+       ball.affiche(fenetre)
     perso.affiche(fenetre)
     pygame.display.update()
 pygame.quit()
