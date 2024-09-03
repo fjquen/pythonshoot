@@ -10,7 +10,7 @@ class Projectile :
             self.rect.topleft = top
             
     def affiche(self, fenetre):
-            fenetre.blit(self.tir_mask, self.rect)
+            fenetre.blit(self.image, self.rect)
             
     def deplace(self) :
             self.rect = self.rect.move(0,-1)
