@@ -7,7 +7,7 @@ from perso import Perso
 from projectile import Projectile
 from random import randint
 
-#test pour push
+
 pygame.init()
 pygame.key.set_repeat(400, 30)
 fenetre = pygame.display.set_mode((640, 480))
@@ -15,7 +15,9 @@ fond = pygame.image.load("background.jpg").convert()
 fenetre.blit(fond,(0,0))
 perso = Perso("Perso.png", (270,380))
 perso.image
-
+score = 0
+font = pygame.font.SysFont('chalkduster.ttf', 72)
+img = font.render('{num}'.format(num=score), True, (255,255,255))
 
 continuer = True
 listeBalles = []
@@ -56,10 +58,14 @@ while continuer :
        for tir in listeTirs :
               if ball.mask.overlap(tir.mask,(tir.rect.x-ball.rect.x,tir.rect.y-ball.rect.y)):
                  listeBalles.remove(ball)
+                 listeTirs.remove(tir)
+                 score += 1
+                 img = font.render('{num}'.format(num=score), True, (255,255,255))
        #else :
            #if ball.collision(perso.rect) :
                #continuer = False
        ball.affiche(fenetre)
     perso.affiche(fenetre)
+    fenetre.blit(img, (20, 20))
     pygame.display.update()
 pygame.quit()
